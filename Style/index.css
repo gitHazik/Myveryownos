@@ -1,0 +1,66 @@
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:sans-serif;
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #334155
+    );
+}
+
+.dock{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    display:flex;
+    gap:20px;
+
+    padding:15px 30px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    border-radius:25px;
+}
+
+.icon{
+    font-size:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.icon:hover{
+    transform:translateY(-8px) scale(1.2);
+}
+.window{
+    width:600px;
+    height:400px;
+
+    position:absolute;
+    top:100px;
+    left:200px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.titlebar{
+    height:45px;
+    display:flex;
+    align-items:center;
+    padding-left:20px;
+
+    background:rgba(255,255,255,0.05);
+}
