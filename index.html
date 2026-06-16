@@ -1,46 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MYveryOWNos</title>
-    <link rel="stylesheet" href="Style/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>myVeryOwnOS</title>
+  <link rel="stylesheet" href="Style/index.css" />
 </head>
 <body>
-    <div id="desktop">
-        <div id="topbar">
-            <div class="top-left">MYveryOWNos</div>
-            <div id="clock">10:52 PM</div>
-        </div>
 
-        <div id="desktop-icons">
-            <div class="desktop-icon" id="icon-files"><span>📁 Files</span></div>
-            <div class="desktop-icon" id="icon-trash"><span>🗑️ Trash</span></div>
-        </div>
+  <!-- ═══════════════════════════════════════════════════════
+       SCREEN 1 · BOOT LOADER
+  ════════════════════════════════════════════════════════════ -->
+  <div id="boot-screen">
+    <div class="boot-center">
+      <div class="boot-logo">
+        <span class="boot-icon">⬡</span>
+        <span class="boot-name">myVeryOwnOS</span>
+        <span class="boot-ver">v1.0.0</span>
+      </div>
+      <div class="boot-log" id="boot-log"></div>
+      <div class="boot-bar-wrap">
+        <div class="boot-bar" id="boot-bar"></div>
+      </div>
+    </div>
+  </div>
 
-        <div id="windows"></div>
+  <!-- ═══════════════════════════════════════════════════════
+       SCREEN 2 · DESKTOP
+  ════════════════════════════════════════════════════════════ -->
+  <div id="desktop" class="hidden">
 
-        <div id="dock">
-            <div class="dock-icon" id="dock-files">📁</div>
-            <div class="dock-icon" id="dock-browser">🌐</div>
-            <div class="dock-icon" id="dock-terminal">🖥️</div>
-            <div class="dock-icon" id="dock-settings">⚙️</div>
-        </div>
+    <!-- Ambient orbs -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <!-- Clock widget -->
+    <div class="desk-clock" id="desk-clock">
+      <div class="clock-time" id="clock-time">00:00</div>
+      <div class="clock-date" id="clock-date">Mon, Jan 1</div>
     </div>
 
-    <template id="window-template">
-        <div class="window">
-            <div class="titlebar">
-                <div class="window-title">App</div>
-                <div class="window-buttons">
-                    <button class="min-btn">−</button>
-                    <button class="close-btn">×</button>
-                </div>
-            </div>
-            <div class="window-body"></div>
-        </div>
-    </template>
+    <!-- Desktop icons -->
+    <div class="desktop-icons">
+      <div class="desk-icon" data-app="notepad">
+        <div class="icon-wrap">📝</div>
+        <span>Notepad</span>
+      </div>
+      <div class="desk-icon" data-app="files">
+        <div class="icon-wrap">📁</div>
+        <span>Files</span>
+      </div>
+      <div class="desk-icon" data-app="browser">
+        <div class="icon-wrap">🌐</div>
+        <span>Browser</span>
+      </div>
+      <div class="desk-icon" data-app="settings">
+        <div class="icon-wrap">⚙️</div>
+        <span>Settings</span>
+      </div>
+    </div>
 
-    <script src="Script/main.js"></script>
+    <!-- ── WINDOWS ── -->
+
+    <!-- Notepad -->
+    <div class="window hidden" id="win-notepad" data-app="notepad">
+      <div class="win-titlebar">
+        <div class="win-title"><span class="win-icon">📝</span> Notepad</div>
+        <div class="win-controls">
+          <button class="wbtn min" title="Minimise">─</button>
+          <button class="wbtn max" title="Maximise">□</button>
+          <button class="wbtn cls" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-toolbar">
+        <button class="tb-btn" id="np-new">New</button>
+        <button class="tb-btn" id="np-save">Save</button>
+        <button class="tb-btn" id="np-open">Open</button>
+        <select class="tb-select" id="np-font">
+          <option>Monospace</option>
+          <option>Sans-serif</option>
+          <option>Serif</option>
+        </select>
+        <select class="tb-select" id="np-size">
+          <option value="13">13px</option>
+          <option value="15" selected>15px</option>
+          <option value="18">18px</option>
+          <option value="22">22px</option>
+        </select>
+        <span class="tb-sep"></span>
+        <span class="tb-stat" id="np-stat">0 chars · 0 lines</span>
+      </div>
+      <textarea class="notepad-area" id="notepad-area" placeholder="Start typing…" spellcheck="false"></textarea>
+      <input type="file" id="np-file-input" accept=".txt" style="display:none" />
+    </div>
+
+    <!-- File Explorer -->
+    <div class="window hidden" id="win-files" data-app="files">
+      <div class="win-titlebar">
+        <div class="win-title"><span class="win-icon">📁</span> Files</div>
+        <div class="win-controls">
+          <button class="wbtn min" title="Minimise">─</button>
+          <button class="wbtn max" title="Maximise">□</button>
+          <button class="wbtn cls" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-toolbar">
+        <button class="tb-btn" id="fe-back">← Back</button>
+        <button class="tb-btn" id="fe-fwd">→ Fwd</button>
+        <button class="tb-btn" id="fe-up">↑ Up</button>
+        <span class="fe-path" id="fe-path">~/</span>
+        <button class="tb-btn" id="fe-new-folder" style="margin-left:auto">+ Folder</button>
+        <button class="tb-btn" id="fe-new-file">+ File</button>
+      </div>
+      <div class="fe-body">
+        <div class="fe-sidebar">
+          <div class="fe-sidebar-item active" data-path="home">🏠 Home</div>
+          <div class="fe-sidebar-item" data-path="docs">📄 Documents</div>
+          <div class="fe-sidebar-item" data-path="downloads">⬇️ Downloads</div>
+          <div class="fe-sidebar-item" data-path="pictures">🖼️ Pictures</div>
+          <div class="fe-sidebar-item" data-path="music">🎵 Music</div>
+          <div class="fe-sidebar-item" data-path="trash">🗑️ Trash</div>
+        </div>
+        <div class="fe-main" id="fe-main"></div>
+      </div>
+    </div>
+
+    <!-- Browser -->
+    <div class="window hidden" id="win-browser" data-app="browser">
+      <div class="win-titlebar">
+        <div class="win-title"><span class="win-icon">🌐</span> Browser</div>
+        <div class="win-controls">
+          <button class="wbtn min" title="Minimise">─</button>
+          <button class="wbtn max" title="Maximise">□</button>
+          <button class="wbtn cls" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-toolbar browser-bar">
+        <button class="tb-btn" id="br-back">←</button>
+        <button class="tb-btn" id="br-fwd">→</button>
+        <button class="tb-btn" id="br-reload">↻</button>
+        <input class="br-url" id="br-url" type="text" value="https://www.wikipedia.org" />
+        <button class="tb-btn" id="br-go">Go</button>
+      </div>
+      <div class="browser-tabs" id="browser-tabs"></div>
+      <iframe class="browser-frame" id="browser-frame" src="https://www.wikipedia.org" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+    </div>
+
+    <!-- Settings -->
+    <div class="window hidden" id="win-settings" data-app="settings">
+      <div class="win-titlebar">
+        <div class="win-title"><span class="win-icon">⚙️</span> Settings</div>
+        <div class="win-controls">
+          <button class="wbtn min" title="Minimise">─</button>
+          <button class="wbtn max" title="Maximise">□</button>
+          <button class="wbtn cls" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="settings-body">
+        <div class="settings-nav">
+          <div class="sn-item active" data-tab="appearance">🎨 Appearance</div>
+          <div class="sn-item" data-tab="system">🖥️ System</div>
+          <div class="sn-item" data-tab="about">ℹ️ About</div>
+        </div>
+        <div class="settings-content">
+
+          <div class="stab active" id="stab-appearance">
+            <h2>Appearance</h2>
+            <div class="setting-row">
+              <label>Accent colour</label>
+              <div class="accent-swatches">
+                <div class="swatch active" data-color="#7c5cbf" style="background:#7c5cbf"></div>
+                <div class="swatch" data-color="#2196f3" style="background:#2196f3"></div>
+                <div class="swatch" data-color="#00bcd4" style="background:#00bcd4"></div>
+                <div class="swatch" data-color="#e91e63" style="background:#e91e63"></div>
+                <div class="swatch" data-color="#4caf50" style="background:#4caf50"></div>
+                <div class="swatch" data-color="#ff5722" style="background:#ff5722"></div>
+              </div>
+            </div>
+            <div class="setting-row">
+              <label>Blur intensity</label>
+              <input type="range" id="blur-range" min="4" max="32" value="14" />
+              <span id="blur-val">14px</span>
+            </div>
+            <div class="setting-row">
+              <label>Glass opacity</label>
+              <input type="range" id="opacity-range" min="5" max="40" value="15" />
+              <span id="opacity-val">15%</span>
+            </div>
+            <div class="setting-row">
+              <label>Wallpaper</label>
+              <div class="wallpaper-grid">
+                <div class="wp active" data-wp="0"></div>
+                <div class="wp" data-wp="1"></div>
+                <div class="wp" data-wp="2"></div>
+                <div class="wp" data-wp="3"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stab" id="stab-system">
+            <h2>System</h2>
+            <div class="setting-row">
+              <label>OS Name</label>
+              <span class="setting-val">myVeryOwnOS v1.0.0</span>
+            </div>
+            <div class="setting-row">
+              <label>Kernel</label>
+              <span class="setting-val">VanillaJS 2025 LTS</span>
+            </div>
+            <div class="setting-row">
+              <label>Shell</label>
+              <span class="setting-val">mysh 1.0</span>
+            </div>
+            <div class="setting-row">
+              <label>Animations</label>
+              <label class="toggle">
+                <input type="checkbox" id="anim-toggle" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-row">
+              <label>24-hour clock</label>
+              <label class="toggle">
+                <input type="checkbox" id="clock24-toggle" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="stab" id="stab-about">
+            <h2>About myVeryOwnOS</h2>
+            <div class="about-logo">⬡</div>
+            <p class="about-text">myVeryOwnOS is a browser-based operating system built with pure HTML, CSS, and JavaScript — no frameworks, no dependencies.</p>
+            <p class="about-text">Crafted for hackathon glory. Glass-minimal, beautifully weird.</p>
+            <div class="about-badges">
+              <span class="badge">HTML5</span>
+              <span class="badge">CSS3</span>
+              <span class="badge">Vanilla JS</span>
+              <span class="badge">Glassmorphism</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TASKBAR ── -->
+    <div class="taskbar" id="taskbar">
+      <div class="taskbar-left">
+        <div class="tb-logo">⬡</div>
+      </div>
+      <div class="taskbar-center" id="taskbar-apps">
+        <!-- pinned app buttons injected by JS -->
+      </div>
+      <div class="taskbar-right">
+        <span class="tb-tray-icon" title="Wi-Fi">📶</span>
+        <span class="tb-tray-icon" title="Battery">🔋</span>
+        <span class="tb-tray-icon" title="Volume">🔊</span>
+        <div class="tb-clock" id="tb-clock">00:00</div>
+      </div>
+    </div>
+
+  </div><!-- /desktop -->
+
+  <script src="Script/main.js"></script>
 </body>
 </html>
