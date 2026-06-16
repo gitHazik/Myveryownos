@@ -4,140 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MYveryOWNos</title>
-
     <link rel="stylesheet" href="Style/index.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div id="boot-screen">
-        <h1>MYveryOWNos</h1>
-
-        <div class="boot-text">
-            <p>Loading kernel...</p>
-            <p>Starting services...</p>
-            <p>Mounting filesystem...</p>
-            <p>Launching desktop...</p>
-        </div>
-
-        <div class="progress">
-            <div id="progress-bar"></div>
-        </div>
-    </div>
-
-    <div id="lock-screen" class="hidden">
-
-        <div class="lock-content">
-            <h1 id="lock-time"></h1>
-            <p>Press Enter to Unlock</p>
-        </div>
-
-    </div>
-
-    <div id="desktop" class="hidden">
-
-        <!-- Top Bar -->
+    <div id="desktop">
         <div id="topbar">
-
-            <div class="top-left">
-                MYveryOWNos
-            </div>
-
-            <div id="clock"></div>
-
+            <div class="top-left">MYveryOWNos</div>
+            <div id="clock">10:52 PM</div>
         </div>
 
         <div id="desktop-icons">
-
-            <div class="desktop-icon" id="icon-files">
-                <div class="emoji">📁</div>
-                <span>Files</span>
-            </div>
-
-            <div class="desktop-icon" id="icon-trash">
-                <div class="emoji">🗑️</div>
-                <span>Trash</span>
-            </div>
-
-            <div class="desktop-icon" id="icon-notes">
-                <div class="emoji">📝</div>
-                <span>Notes</span>
-            </div>
-
+            <div class="desktop-icon" id="icon-files"><span>📁 Files</span></div>
+            <div class="desktop-icon" id="icon-trash"><span>🗑️ Trash</span></div>
         </div>
 
         <div id="windows"></div>
 
-        
-        <div id="notifications"></div>
-
-        
         <div id="dock">
-
-            <div class="dock-icon" id="dock-files">
-                📁
-            </div>
-
-            <div class="dock-icon" id="dock-browser">
-                🌐
-            </div>
-
-            <div class="dock-icon" id="dock-notes">
-                📝
-            </div>
-
-            <div class="dock-icon" id="dock-terminal">
-                🖥️
-            </div>
-
-            <div class="dock-icon" id="dock-settings">
-                ⚙️
-            </div>
-
-            <div class="dock-icon" id="dock-trash">
-                🗑️
-            </div>
-
+            <div class="dock-icon" id="dock-files">📁</div>
+            <div class="dock-icon" id="dock-browser">🌐</div>
+            <div class="dock-icon" id="dock-terminal">🖥️</div>
+            <div class="dock-icon" id="dock-settings">⚙️</div>
         </div>
-
     </div>
 
-    
     <template id="window-template">
-
         <div class="window">
-
             <div class="titlebar">
-
-                <div class="window-title">
-                    App
-                </div>
-
+                <div class="window-title">App</div>
                 <div class="window-buttons">
-
-                    <button class="min-btn">
-                        −
-                    </button>
-
-                    <button class="close-btn">
-                        ×
-                    </button>
-
+                    <button class="min-btn">−</button>
+                    <button class="close-btn">×</button>
                 </div>
-
             </div>
-
-            <div class="window-body">
-
-            </div>
-
+            <div class="window-body"></div>
         </div>
-
     </template>
 
     <script src="Script/main.js"></script>
-
 </body>
 </html>
