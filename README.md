@@ -1,6 +1,7 @@
 # myVeryOwnOS
 
-A browser based desktop OS built for a hackathon. No frameworks, no libraries just HTML, CSS, and vanilla JS.
+A browser based desktop OS. No frameworks, no libraries just HTML, CSS, and vanilla JS.
+
 
 ---
 
