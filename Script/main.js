@@ -1,11 +1,6 @@
-/* ═══════════════════════════════════════════════════════════
-   myVeryOwnOS · app.js
-   Pure Vanilla JS — no dependencies
-═══════════════════════════════════════════════════════════ */
-
 'use strict';
 
-/* ─── Toast ─────────────────────────────────────────────── */
+
 const toastContainer = (() => {
   const c = document.createElement('div');
   c.id = 'toast-container';
@@ -21,9 +16,7 @@ function showToast(msg) {
   setTimeout(() => t.remove(), 2800);
 }
 
-/* ══════════════════════════════════════════════════════════
-   BOOT SEQUENCE
-══════════════════════════════════════════════════════════ */
+
 const bootLines = [
   '[ OK ] Initialising kernel modules…',
   '[ OK ] Mounting virtual filesystem…',
@@ -68,9 +61,7 @@ function launchDesktop() {
   }, 620);
 }
 
-/* ══════════════════════════════════════════════════════════
-   DESKTOP
-══════════════════════════════════════════════════════════ */
+
 function initDesktop() {
   initClock();
   initTaskbar();
@@ -84,7 +75,6 @@ function initDesktop() {
   showToast('Welcome to myVeryOwnOS 👋');
 }
 
-/* ─── Clock ─────────────────────────────────────────────── */
 let use24h = true;
 
 function initClock() {
@@ -107,7 +97,7 @@ function initClock() {
   setInterval(updateClock, 5000);
 }
 
-/* ─── Taskbar apps ──────────────────────────────────────── */
+
 const APPS = [
   { id: 'notepad',  label: 'Notepad',  icon: '📝' },
   { id: 'files',    label: 'Files',    icon: '📁' },
@@ -127,9 +117,8 @@ function initTaskbar() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════
-   WINDOW MANAGER
-══════════════════════════════════════════════════════════ */
+
+
 let zTop = 200;
 
 function initWindowManager() {
@@ -219,7 +208,7 @@ function toggleMaximise(win) {
   }
 }
 
-/* Desktop icon double-click */
+
 function initDesktopIcons() {
   document.querySelectorAll('.desk-icon').forEach(icon => {
     let clicks = 0;
@@ -231,7 +220,7 @@ function initDesktopIcons() {
   });
 }
 
-/* ── Drag ─────────────────────────────────────────────────── */
+
 function makeDraggable(win, handle) {
   let ox, oy;
 
@@ -257,7 +246,7 @@ function makeDraggable(win, handle) {
     document.addEventListener('mouseup',   onUp);
   });
 
-  // Touch support
+
   handle.addEventListener('touchstart', e => {
     if (win.classList.contains('maximised')) return;
     const t = e.touches[0];
@@ -271,7 +260,7 @@ function makeDraggable(win, handle) {
   }, { passive: true });
 }
 
-/* ── Resize ────────────────────────────────────────────────── */
+
 function makeResizable(win) {
   const handle = document.createElement('div');
   handle.className = 'win-resize';
@@ -298,9 +287,6 @@ function makeResizable(win) {
   });
 }
 
-/* ══════════════════════════════════════════════════════════
-   NOTEPAD
-══════════════════════════════════════════════════════════ */
 function initNotepad() {
   const area    = document.getElementById('notepad-area');
   const stat    = document.getElementById('np-stat');
@@ -352,9 +338,7 @@ function initNotepad() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════
-   FILE EXPLORER
-══════════════════════════════════════════════════════════ */
+
 const FS = {
   home:      [
     { name: 'Documents', type: 'dir', path: 'docs'      },
@@ -478,9 +462,7 @@ function initFileExplorer() {
   render();
 }
 
-/* ══════════════════════════════════════════════════════════
-   BROWSER
-══════════════════════════════════════════════════════════ */
+
 function initBrowser() {
   const frame     = document.getElementById('browser-frame');
   const urlInput  = document.getElementById('br-url');
@@ -562,9 +544,7 @@ function initBrowser() {
   loadTab();
 }
 
-/* ══════════════════════════════════════════════════════════
-   SETTINGS
-══════════════════════════════════════════════════════════ */
+
 function initSettings() {
   // Nav tabs
   document.querySelectorAll('.sn-item').forEach(item => {
@@ -633,9 +613,7 @@ function initSettings() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════
-   CONTEXT MENU
-══════════════════════════════════════════════════════════ */
+
 function initContextMenu() {
   let menu = null;
 
@@ -680,7 +658,4 @@ function initContextMenu() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
-/* ══════════════════════════════════════════════════════════
-   KICK OFF
-══════════════════════════════════════════════════════════ */
 runBoot();
